@@ -66,4 +66,22 @@
   int size = (uint8_t)&test_arry[6] - (uint8_t)&test_arry[0]; // 等于 24
   ```
 
-  
+
+
+
+## 溢出
+
+无符号 32 位整型数，计算两数之间的差值：
+
+场景：计算某函数调用间隔是否是 大于 5秒
+
+
+
+cut_tick = rt_get_tick()
+
+cur_tick - last_tick <  rt_tick_ms(5000)
+
+如果 cur_tick 溢出了，值为 5，而 last_tick 为 0xffff fffe
+
+使用 5 - 0xffff fffe 依然能够计算出两者之间的差
+
